@@ -1,14 +1,9 @@
 import React from 'react'
+import Game from './game/Game'
 
 const App = () => {
   return (
-    <div>
-      <header>
-        <p>
-          Crossword!
-        </p>
-      </header>
-    </div>
+    <Game />
   )
 }
 
