@@ -14,7 +14,7 @@ const GridContainer = styled(({ gridSize, ...otherProps }) => <div {...otherProp
 `
 
 const Board = props => {
-	const { puzzle, onSelectWord, selectedWordIndex } = props
+	const { puzzle, onSelectWord, selectedWordIndex, tempLettersState, onRemoveTempLetter } = props
 	const { gridSize, words } = puzzle
 
 	const wordBlocks = words.map((word, index) =>
@@ -22,6 +22,8 @@ const Board = props => {
 			word={word}
 			onSelectWord={() => onSelectWord(index)}
 			isSelected={index === selectedWordIndex}
+      tempLettersState={tempLettersState}
+      onRemoveTempLetter={onRemoveTempLetter}
 			key={index}
 		/>
 	)
@@ -37,6 +39,8 @@ Board.propTypes = {
 	puzzle: PropTypes.object,
 	onSelectWord: PropTypes.func,
 	selectedWordIndex: PropTypes.number,
+  tempLettersState: PropTypes.array,
+  onRemoveTempLetter: PropTypes.func,
 }
 
 export default Board

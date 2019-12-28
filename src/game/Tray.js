@@ -22,18 +22,11 @@ const LetterBlock = styled(({ isUsed, ...otherProps }) => <div {...otherProps} /
 `
 
 const Tray = props => {
-	const { letters, onPickTempLetter } = props
-
-	const [letterStates, setLetterStates] = useState([])
-
-	useEffect(() => {
-		setLetterStates(letters.map((letter, index) => ({ letter, isUsed: false, id: index })))
-	}, [letters])
+	const { letterStates, onPickTempLetter } = props
 
 	const handlePickLetter = letterState => {
 		if (!letterState.isUsed) {
-			onPickTempLetter(letterState.letter)
-			setLetterStates(letterStates.map(otherLetterState => letterState.id === otherLetterState.id ? { ...letterState, isUsed: true } : otherLetterState))
+			onPickTempLetter(letterState)
 		}
 	}
 
@@ -49,7 +42,7 @@ const Tray = props => {
 }
 
 Tray.propTypes = {
-	letters: PropTypes.array,
+	letterStates: PropTypes.array,
 	onPickTempLetter: PropTypes.func
 }
 

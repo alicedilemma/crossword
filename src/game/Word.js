@@ -11,18 +11,18 @@ const WordContainer = styled(({ isSelected, coords, direction, ...otherProps }) 
 	${({ direction }) => direction === 'row' ? 'grid-column-end' : 'grid-row-end'}: span ${({ length }) => length};
 `
 
-const Square = styled.div`
-  flex-grow: 1;
+const Square = styled(({ isLocked, ...otherProps }) => <div {...otherProps} />)`
+  flex: 1 1 0;
   display: flex;
   justify-content: center;
   align-items: center;
-	background-color: rgb(240, 240, 240);
+	background-color: ${({ isLocked }) => isLocked ? 'rgb(240, 240, 140)' : 'rgb(240, 240, 240)'};
 	margin: 1px;
 	border-radius: 5px;
 `
 
 const Word = props => {
-	const { word, onSelectWord, isSelected } = props
+	const { word, onSelectWord, isSelected, tempLettersState, onRemoveTempLetter } = props
 	const {
 		text,
 		coords,
@@ -30,11 +30,21 @@ const Word = props => {
 		id,
 	} = word
 
-	const squares = text.map((letter, index) => <Square key={index}>{letter.isVisible ? letter.letter : ''}</Square>)
+	const squares = text.map((letter, index) => {
+		let displayLetter = letter.isVisible ? letter.letter : ''
+		if (isSelected) {
+			displayLetter= tempLettersState[index].tempLetter
+		}
+
+		return (
+			<Square isLocked={letter.isVisible} key={index} onClick={() => isSelected && onRemoveTempLetter(index)}>{displayLetter}</Square>
+		)
+	})
 
 	return (
 		<WordContainer
-			onClick={() => onSelectWord(id)}
+			onClick={() => {
+        onSelectWord(id)}}
 			isSelected={isSelected}
 			coords={coords}
 			direction={direction}
@@ -49,6 +59,8 @@ Word.propTypes = {
 	word: PropTypes.object,
 	onSelectWord: PropTypes.func,
 	isSelected: PropTypes.bool,
+  tempLettersState: PropTypes.array,
+  onRemoveTempLetter: PropTypes.func,
 }
 
 export default Word
