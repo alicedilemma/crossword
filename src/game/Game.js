@@ -47,6 +47,36 @@ const puzzle = {
   ]
 }
 
+// Find overlapping letters
+for (const word of puzzle.words) {
+  let x = word.coords.x
+  let y = word.coords.y
+  for (let i = 0; i < word.text.length; i++) {
+    for (const otherWord of puzzle.words) {
+      if (otherWord !== word) {
+        let x2 = otherWord.coords.x
+        let y2 = otherWord.coords.y
+        for (let j = 0; j < otherWord.text.length; j++) {
+          if (x2 === x && y2 === y) {
+            // an overlap
+            word.text[i].overlap = { wordIndex: puzzle.words.indexOf(otherWord), letterIndex: j} 
+          }
+          if (otherWord.direction === 'row') {
+            x2++
+          } else {
+            y2++
+          }
+        }
+      }
+    }
+    if (word.direction === 'row') {
+      x++
+    } else {
+      y++
+    }
+  }
+}
+
 const Game = props => {
 
   const [selectedWordIndex, setSelectedWordIndex] = useState(null)
@@ -73,7 +103,20 @@ const Game = props => {
       console.log('correct!')
       // lock in this word
       setPuzzleState(p => p.map((wordState, i) => i === selectedWordIndex ? { isDone: true, isLetterDone: new Array(wordState.isLetterDone.length).fill(true)} : wordState))
-      // todo: lock in letters shared with other words
+      // lock in letters shared with other words
+      for (const letter of correctAnswer) {
+        if (letter.overlap) {
+          // how to do cleanly
+          setPuzzleState(puzzleState => {
+            const { wordIndex, letterIndex } = letter.overlap
+            const newWordState = {... puzzleState[wordIndex]}
+            newWordState.isLetterDone = [...newWordState.isLetterDone]
+            newWordState.isLetterDone[letterIndex] = true
+            return puzzleState.map((wordState, index) => index === wordIndex ? newWordState : wordState)
+          })
+        }
+      }
+
       // end the attempt
       setSelectedWordIndex(null)
       setLetterStates([])
@@ -95,12 +138,14 @@ const Game = props => {
     setSelectedWordIndex(index)
 
     const selectedWord = puzzle.words[index]
-    setTempLettersState(selectedWord.text.map(char => (
-      {
-        isLocked: char.isVisible,
-        tempLetter: char.isVisible ? char.letter : null
+    setTempLettersState(selectedWord.text.map((char, charIndex) => {
+      // hacks around data model
+      const isVisible = char.isVisible || puzzleState[index].isLetterDone[charIndex]
+      return {
+        isLocked: isVisible,
+        tempLetter: isVisible ? char.letter : null
       }
-    ))
+    })
     )
 
     setLetterStates(selectedWord.letters.map((letter, index) => ({ letter, isUsed: false, id: index })))
