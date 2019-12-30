@@ -9,7 +9,7 @@ const Word = function (text, x, y, direction) {
   this.coords = { x, y }
   this.letters = [...text, 'a', 'e', 'i']
   this.direction = direction
-  this.text[3].isVisible = true
+  // this.text[3].isVisible = true
 }
 
 const puzzle = {
