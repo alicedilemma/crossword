@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import Board from './Board'
 import Tray from './Tray'
@@ -52,6 +52,21 @@ const Game = props => {
   const [tempLettersState, setTempLettersState] = useState([])
   const [letterStates, setLetterStates] = useState([])
 
+  useEffect(() => {
+    const checkIfAttemptIsSuccessful = () => {
+      if (selectedWordIndex === null) return
+  
+      const correctAnswer = puzzle.words[selectedWordIndex].text
+      if (tempLettersState.every((tempLetter, i) => tempLetter.tempLetter === correctAnswer[i].letter)) {
+        console.log('correct!')
+        // lock in this word
+        // lock in letters shared with other words
+        // check if every word is now solved
+      }
+    }
+    checkIfAttemptIsSuccessful()
+  }, [tempLettersState, selectedWordIndex])
+
   const handleSelectWord = index => {
     if (selectedWordIndex === index) return
 
@@ -94,8 +109,6 @@ const Game = props => {
 
     setLetterStates(letterStates.map((otherLetterState, index) => index === trayIndex ? { ...otherLetterState, isUsed: false } : otherLetterState))
   }
-
-  const letters = selectedWordIndex !== null ? puzzle.words[selectedWordIndex].letters : []
 
   return (
     <div>
