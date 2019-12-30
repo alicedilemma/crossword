@@ -6,6 +6,8 @@ const PictureContainer = styled(({ url, ...otherProps }) => <img {...otherProps}
   width: 200px;
   height: 200px;
   background-color: purple;
+  margin: 0 auto;
+  display: block;
 `
 
 const Picture = props => {

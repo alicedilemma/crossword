@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import Board from './Board'
 import Tray from './Tray'
 import Picture from './Picture'
+import NextButton from './NextButton'
 
 import shuffle from 'shuffle-array'
 
@@ -52,6 +53,8 @@ const Game = props => {
   const [tempLettersState, setTempLettersState] = useState([])
   const [letterStates, setLetterStates] = useState([])
 
+  const [isFinished, setIsFinished] = useState(false)
+
   useEffect(() => {
     const checkIfAttemptIsSuccessful = () => {
       if (selectedWordIndex === null) return
@@ -62,6 +65,8 @@ const Game = props => {
         // lock in this word
         // lock in letters shared with other words
         // check if every word is now solved
+        // if they are:
+        setIsFinished(true)
       }
     }
     checkIfAttemptIsSuccessful()
@@ -120,10 +125,11 @@ const Game = props => {
         onRemoveTempLetter={handleRemoveTempLetter}
       />
       <Picture url={puzzle.picture}/>
-      <Tray
+      {isFinished && <NextButton/>}
+      {!isFinished && <Tray
         letterStates={letterStates}
         onPickTempLetter={handlePickTempLetter}
-      />
+      />}
     </div>
   )
 }
