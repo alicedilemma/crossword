@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/crossword/static/js/main.7d4f72e2.chunk.js",
+    "main.js.map": "/crossword/static/js/main.7d4f72e2.chunk.js.map",
+    "runtime-main.js": "/crossword/static/js/runtime-main.61952a52.js",
+    "runtime-main.js.map": "/crossword/static/js/runtime-main.61952a52.js.map",
+    "static/js/2.5c85dede.chunk.js": "/crossword/static/js/2.5c85dede.chunk.js",
+    "static/js/2.5c85dede.chunk.js.map": "/crossword/static/js/2.5c85dede.chunk.js.map",
+    "index.html": "/crossword/index.html",
+    "precache-manifest.fe56adbadf7884b91c304b9c722e353a.js": "/crossword/precache-manifest.fe56adbadf7884b91c304b9c722e353a.js",
+    "service-worker.js": "/crossword/service-worker.js",
+    "static/js/2.5c85dede.chunk.js.LICENSE": "/crossword/static/js/2.5c85dede.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.61952a52.js",
+    "static/js/2.5c85dede.chunk.js",
+    "static/js/main.7d4f72e2.chunk.js"
+  ]
+}
