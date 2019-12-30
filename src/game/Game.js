@@ -64,7 +64,7 @@ const Game = props => {
 
   const [puzzleState, setPuzzleState] = useState(makePuzzleState())
 
-  // Check if the whole puzzle was solved
+  // Check if a word was solved
   useEffect(() => {
     if (selectedWordIndex === null) return
 
@@ -73,9 +73,11 @@ const Game = props => {
       console.log('correct!')
       // lock in this word
       setPuzzleState(p => p.map((wordState, i) => i === selectedWordIndex ? { isDone: true, isLetterDone: new Array(wordState.isLetterDone.length).fill(true)} : wordState))
-      // lock in letters shared with other words
-
-      // check if every word is now solved - done in a separate useEffect
+      // todo: lock in letters shared with other words
+      // end the attempt
+      setSelectedWordIndex(null)
+      setLetterStates([])
+      // a separate useEffect will check if every word is now solved
     }
   }, [tempLettersState, selectedWordIndex])
 
@@ -88,8 +90,10 @@ const Game = props => {
 
   const handleSelectWord = index => {
     if (selectedWordIndex === index) return
+    if (puzzleState[index].isDone) return
 
     setSelectedWordIndex(index)
+
     const selectedWord = puzzle.words[index]
     setTempLettersState(selectedWord.text.map(char => (
       {
