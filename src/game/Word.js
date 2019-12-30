@@ -23,6 +23,9 @@ const Square = styled(({ isSelected, isLocked, ...otherProps }) => <div {...othe
 	margin: 1px;
   border-radius: 5px;
   user-select: none;
+  font-size: 35px;
+  text-transform: uppercase;
+  font-family: sans-serif;
 `
 
 const Word = props => {

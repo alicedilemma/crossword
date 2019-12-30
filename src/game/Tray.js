@@ -7,7 +7,10 @@ const Container = styled.div`
 	flex-direction: row;
 	justify-content: center;
 	border: 1px solid black;
-	height: 40px;
+  height: 40px;
+  font-size: 35px;
+  text-transform: uppercase;
+  font-family: sans-serif;
 `
 
 const LetterBlock = styled(({ isUsed, ...otherProps }) => <div {...otherProps} />)`
