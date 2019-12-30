@@ -13,9 +13,16 @@ const Word = function (text, x, y, direction) {
 }
 
 const puzzle = {
-  picture: 'https://placekitten.com/200/300',
+  picture: 'https://p1.pxfuel.com/preview/485/1009/177/christmas-cookies-gingerbread-cookie-holiday-christmas-tree-gifts.jpg',
   gridSize: 10,
-  words: [new Word('carol', 1, 3, 'row'), new Word('christmas', 7, 1, 'column')]
+  words: [
+    new Word('christmas', 4, 1, 'column'),
+    new Word('food', 7, 2, 'row'),
+    new Word('carol', 2, 3, 'row'),
+    new Word('santa', 4, 5, 'row'),
+    new Word('merry', 4, 7, 'row'),
+    new Word('presents', 1, 9, 'row'),
+  ]
 }
 
 const Game = props => {
