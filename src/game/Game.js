@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import Board from './Board'
 import Tray from './Tray'
+import Picture from './Picture'
 
 const Word = function (text, x, y, direction) {
   this.text = [...text].map(char => ({ letter: char, isVisible: false }))
@@ -12,7 +13,7 @@ const Word = function (text, x, y, direction) {
 }
 
 const puzzle = {
-  picture: '',
+  picture: 'https://placekitten.com/200/300',
   gridSize: 10,
   words: [new Word('carol', 1, 3, 'row'), new Word('christmas', 7, 1, 'column')]
 }
@@ -77,7 +78,7 @@ const Game = props => {
         tempLettersState={tempLettersState}
         onRemoveTempLetter={handleRemoveTempLetter}
       />
-      <div>picture</div>
+      <Picture url={puzzle.picture}/>
       <Tray
         letterStates={letterStates}
         onPickTempLetter={handlePickTempLetter}
