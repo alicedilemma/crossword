@@ -19,6 +19,7 @@ const LetterBlock = styled(({ isUsed, ...otherProps }) => <div {...otherProps} /
   margin: 10px;
   width: 40px;
   height: 40px;
+  user-select: none;
 `
 
 const Tray = props => {

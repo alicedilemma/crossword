@@ -18,7 +18,8 @@ const Square = styled(({ isLocked, ...otherProps }) => <div {...otherProps} />)`
   align-items: center;
 	background-color: ${({ isLocked }) => isLocked ? 'rgb(240, 240, 140)' : 'rgb(240, 240, 240)'};
 	margin: 1px;
-	border-radius: 5px;
+  border-radius: 5px;
+  user-select: none;
 `
 
 const Word = props => {
