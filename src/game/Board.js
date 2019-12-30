@@ -14,10 +14,21 @@ const GridContainer = styled(({ gridSize, ...otherProps }) => <div {...otherProp
 `
 
 const Board = props => {
-	const { puzzle, onSelectWord, selectedWordIndex, tempLettersState, onRemoveTempLetter } = props
+	const { puzzle, puzzleState, onSelectWord, selectedWordIndex, tempLettersState, onRemoveTempLetter } = props
 	const { gridSize, words } = puzzle
 
-	const wordBlocks = words.map((word, index) =>
+  // all this should go...
+  const fixedWords = []
+  words.forEach((word, wordIndex) => {
+    const fixedText = word.text.map(letter => { return {...letter}})
+    
+    fixedText.forEach((letter, letterIndex) => {
+      letter.isVisible |= puzzleState[wordIndex].isLetterDone[letterIndex]
+    })
+    fixedWords.push({...word, text: fixedText})
+  })
+
+  const wordBlocks = fixedWords.map((word, index) =>
 		<Word
 			word={word}
 			onSelectWord={() => onSelectWord(index)}
@@ -37,6 +48,7 @@ const Board = props => {
 
 Board.propTypes = {
 	puzzle: PropTypes.object,
+	puzzleState: PropTypes.array,
 	onSelectWord: PropTypes.func,
 	selectedWordIndex: PropTypes.number,
   tempLettersState: PropTypes.array,

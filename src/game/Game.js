@@ -55,22 +55,36 @@ const Game = props => {
 
   const [isFinished, setIsFinished] = useState(false)
 
+  const makePuzzleState = () => {
+      return puzzle.words.map(word => { return {
+      isDone: false,
+      isLetterDone: Array(word.text.length).fill(false) 
+    }})
+  }
+
+  const [puzzleState, setPuzzleState] = useState(makePuzzleState())
+
+  // Check if the whole puzzle was solved
   useEffect(() => {
-    const checkIfAttemptIsSuccessful = () => {
-      if (selectedWordIndex === null) return
-  
-      const correctAnswer = puzzle.words[selectedWordIndex].text
-      if (tempLettersState.every((tempLetter, i) => tempLetter.tempLetter === correctAnswer[i].letter)) {
-        console.log('correct!')
-        // lock in this word
-        // lock in letters shared with other words
-        // check if every word is now solved
-        // if they are:
-        setIsFinished(true)
-      }
+    if (selectedWordIndex === null) return
+
+    const correctAnswer = puzzle.words[selectedWordIndex].text
+    if (tempLettersState.every((tempLetter, i) => tempLetter.tempLetter === correctAnswer[i].letter)) {
+      console.log('correct!')
+      // lock in this word
+      setPuzzleState(p => p.map((wordState, i) => i === selectedWordIndex ? { isDone: true, isLetterDone: new Array(wordState.isLetterDone.length).fill(true)} : wordState))
+      // lock in letters shared with other words
+
+      // check if every word is now solved - done in a separate useEffect
     }
-    checkIfAttemptIsSuccessful()
   }, [tempLettersState, selectedWordIndex])
+
+  // is game finished?
+  useEffect(() => {
+    if (puzzleState.every(word => word.isDone)) {
+      setIsFinished(true)
+    }
+  }, [puzzleState])
 
   const handleSelectWord = index => {
     if (selectedWordIndex === index) return
@@ -119,6 +133,7 @@ const Game = props => {
     <div>
       <Board
         puzzle={puzzle}
+        puzzleState={puzzleState}
         onSelectWord={handleSelectWord}
         selectedWordIndex={selectedWordIndex}
         tempLettersState={tempLettersState}
