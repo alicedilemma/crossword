@@ -146,9 +146,16 @@ const Game = props => {
     setSelectedWordIndex(index)
 
     const selectedWord = puzzle.words[index]
+    const newLetterStates = selectedWord.letters.map((letter, index) => ({ letter, isUsed: false, id: index }))
+
     setTempLettersState(selectedWord.text.map((char, charIndex) => {
-      // hacks around data model
+
       const isVisible = char.isVisible || puzzleState[index].isLetterDone[charIndex]
+      if (isVisible) {
+        const usedIndex = newLetterStates.findIndex(letter => letter.letter === char.letter && !letter.isUsed)
+        newLetterStates[usedIndex].isUsed = true
+      }
+      
       return {
         isLocked: isVisible,
         tempLetter: isVisible ? char.letter : null
@@ -156,8 +163,7 @@ const Game = props => {
     })
     )
 
-    // todo: mark letters as already used if they are locked in
-    setLetterStates(selectedWord.letters.map((letter, index) => ({ letter, isUsed: false, id: index })))
+    setLetterStates(newLetterStates)
   }
 
   const handlePickTempLetter = selectedLetter => {
