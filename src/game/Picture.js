@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-const PictureContainer = styled(({ url, ...otherProps }) => <img {...otherProps} />)`
+const PictureContainer = styled.img`
   width: 200px;
   height: 200px;
   background-color: purple;
@@ -10,12 +10,29 @@ const PictureContainer = styled(({ url, ...otherProps }) => <img {...otherProps}
   display: block;
 `
 
+const PictureOverlay = styled.img`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  overflow: auto;
+`
+
 const Picture = props => {
-	const { url } = props
+  const { url } = props
+  const [isBig, setIsBig] = useState(false)
+
+  const handleClick = () => setIsBig(old => !old)
 
 	return (
-		<PictureContainer src={url} alt='' >
-		</PictureContainer>
+    <>
+      <PictureContainer src={url} alt='' onClick={handleClick} />
+      {isBig && <PictureOverlay src={url} onClick={handleClick} />}
+    </>
 	)
 }
 
