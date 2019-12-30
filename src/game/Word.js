@@ -5,18 +5,21 @@ import styled from 'styled-components'
 const WordContainer = styled(({ isSelected, coords, direction, ...otherProps }) => <div {...otherProps} />)`
 	display: flex;
 	flex-direction: ${({ direction }) => direction};
-	justify-content: center;
+  justify-content: center;
+  z-index: ${({ isSelected}) => isSelected ? '1' : 'auto'}
 	grid-column-start: ${({ coords }) => coords.x};
 	grid-row-start: ${({ coords }) => coords.y};
 	${({ direction }) => direction === 'row' ? 'grid-column-end' : 'grid-row-end'}: span ${({ length }) => length};
 `
 
-const Square = styled(({ isLocked, ...otherProps }) => <div {...otherProps} />)`
+const Square = styled(({ isSelected, isLocked, ...otherProps }) => <div {...otherProps} />)`
   flex: 1 1 0;
   display: flex;
   justify-content: center;
   align-items: center;
-	background-color: ${({ isLocked }) => isLocked ? 'rgb(240, 240, 140)' : 'rgb(240, 240, 240)'};
+  background-color: ${({ isLocked, isSelected }) => 
+    isLocked ? 'rgb(240, 240, 140)' : 
+      isSelected ? 'rgb(220, 220, 240)' : 'rgb(240, 240, 240)'};
 	margin: 1px;
   border-radius: 5px;
   user-select: none;
@@ -36,9 +39,8 @@ const Word = props => {
 		if (isSelected) {
 			displayLetter= tempLettersState[index].tempLetter
 		}
-
 		return (
-			<Square isLocked={letter.isVisible} key={index} onClick={() => isSelected && onRemoveTempLetter(index)}>{displayLetter}</Square>
+			<Square isSelected={isSelected} isLocked={letter.isVisible} key={index} onClick={() => isSelected && onRemoveTempLetter(index)}>{displayLetter}</Square>
 		)
 	})
 
