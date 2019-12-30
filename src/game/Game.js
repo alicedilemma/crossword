@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
 
 import Board from './Board'
 import Tray from './Tray'
@@ -6,6 +7,13 @@ import Picture from './Picture'
 import NextButton from './NextButton'
 
 import shuffle from 'shuffle-array'
+
+
+const Base = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
 const randomLetters = 
   ('abcdefghijklmnopqrstuvwxyz'
@@ -148,6 +156,7 @@ const Game = props => {
     })
     )
 
+    // todo: mark letters as already used if they are locked in
     setLetterStates(selectedWord.letters.map((letter, index) => ({ letter, isUsed: false, id: index })))
   }
 
@@ -179,7 +188,7 @@ const Game = props => {
   }
 
   return (
-    <div>
+    <Base>
       <Board
         puzzle={puzzle}
         puzzleState={puzzleState}
@@ -194,7 +203,7 @@ const Game = props => {
         letterStates={letterStates}
         onPickTempLetter={handlePickTempLetter}
       />}
-    </div>
+    </Base>
   )
 }
 
