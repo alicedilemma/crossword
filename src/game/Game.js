@@ -4,10 +4,31 @@ import Board from './Board'
 import Tray from './Tray'
 import Picture from './Picture'
 
+import shuffle from 'shuffle-array'
+
+const randomLetters = 
+  ('abcdefghijklmnopqrstuvwxyz'
+  + 'abcdefghijklmnoprstuvwy'
+  + 'aeiou').split('')
+
+function randomLetter() {
+  const i = Math.floor(Math.random() * randomLetters.length)
+  return randomLetters[i]
+}
+
+function getRandomLettersFor(word) {
+  const result = []
+  for (let i = 0; i < word.length / 3 || i < 3; i++) {
+    result.push(randomLetter())
+  }
+  return result
+}
+
 const Word = function (text, x, y, direction) {
   this.text = [...text].map(char => ({ letter: char, isVisible: false }))
   this.coords = { x, y }
-  this.letters = [...text, 'a', 'e', 'i']
+  this.letters = [...text, ...getRandomLettersFor(text)]
+  shuffle(this.letters)
   this.direction = direction
   // this.text[3].isVisible = true
 }
