@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
@@ -7,6 +7,18 @@ const PictureContainer = styled.img`
   background-color: purple;
   margin: 0 auto;
   display: block;
+`
+
+const PictureBacking = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.3);
 `
 
 const PictureOverlay = styled.img`
@@ -19,7 +31,7 @@ const PictureOverlay = styled.img`
   max-height: 100%;
   margin: auto;
   overflow: auto;
-  z-index: 2;
+  z-index: 3;
 `
 
 const Picture = props => {
@@ -28,9 +40,19 @@ const Picture = props => {
 
   const handleClick = () => setIsBig(old => !old)
 
+  useEffect(() => {
+    const callback = (e) => {
+      if (e.key === 'Escape') {
+        setIsBig(false)
+      }
+    }
+    window.addEventListener('keydown', callback)
+  }, [])
+
 	return (
     <>
       <PictureContainer src={url} alt='' onClick={handleClick} />
+      {isBig && <PictureBacking onClick={handleClick} />}
       {isBig && <PictureOverlay src={url} onClick={handleClick} />}
     </>
 	)
