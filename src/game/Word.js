@@ -18,7 +18,7 @@ const Square = styled(({ isSelected, isLocked, ...otherProps }) => <div {...othe
   justify-content: center;
   align-items: center;
   background-color: ${({ isLocked, isSelected }) => 
-    isLocked ? 'rgb(240, 240, 140)' : 
+    isLocked ? 'rgb(200, 141, 187)' : 
       isSelected ? 'rgb(220, 220, 240)' : 'rgb(240, 240, 240)'};
 	margin: 1px;
   border-radius: 5px;
