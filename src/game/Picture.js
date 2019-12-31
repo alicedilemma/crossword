@@ -4,8 +4,11 @@ import styled from 'styled-components'
 
 const PictureContainer = styled.img`
   height: 200px;
-  margin: 0 auto;
+  margin: 10px auto;
   display: block;
+  -webkit-box-shadow: 4px 4px 15px 0px rgba(92,90,92,1);
+  -moz-box-shadow: 4px 4px 15px 0px rgba(92,90,92,1);
+  box-shadow: 4px 4px 15px 0px rgba(92,90,92,1);
 `
 
 const PictureBacking = styled.div`

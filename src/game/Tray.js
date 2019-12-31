@@ -14,7 +14,6 @@ const LetterBlock = styled(({ isUsed, ...otherProps }) => <div {...otherProps} /
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
   border-radius: 5px;
   background-color: ${({ isUsed }) => isUsed ? 'rgb(128, 128, 128)' : 'rgb(240, 240, 240)'}} ;
   margin: 5px;
