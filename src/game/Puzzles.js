@@ -65,6 +65,9 @@ Puzzles.push({
 })
 
 for (const puzzle of Puzzles) {
+  // One letter starts relealed
+  puzzle.words[0].text[0].isVisible = true
+
   // Find overlapping letters
   for (const word of puzzle.words) {
     let x = word.coords.x
