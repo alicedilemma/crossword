@@ -42,7 +42,7 @@ const Word = function (text, x, y, direction) {
   // this.text[3].isVisible = true
 }
 
-const puzzle = {
+/*const puzzle = {
   picture: '1.jpg',
   gridSize: 10,
   words: [
@@ -50,7 +50,17 @@ const puzzle = {
     new Word('desk', 4, 2, 'column'),
     new Word('laptop', 2, 4, 'column'),
     new Word('notebook', 1, 8, 'row'),
-    //new Word('plant', 2, 9, 'row'),
+  ]
+}*/
+
+const puzzle = {
+  picture: '2.jpg',
+  gridSize: 11,
+  words: [
+    new Word('hills', 1, 1, 'row'),
+    new Word('sunset', 5, 1, 'column'),
+    new Word('water', 3, 6, 'row'),
+    new Word('friends', 7, 5, 'column'),
   ]
 }
 
