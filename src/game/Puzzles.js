@@ -51,6 +51,19 @@ Puzzles.push({
   ]
 })
 
+Puzzles.push({
+  picture: '3.jpg',
+  gridSize: 12,
+  words: [
+    new Word('freedom', 3, 1, 'column'),
+    new Word('horses', 1, 2, 'row'),
+    new Word('peaceful', 2, 4, 'row'),
+    new Word('fence', 7, 4, 'column'),
+    new Word('clouds', 7, 7, 'row'),
+    new Word('grass', 12, 3, 'column'),
+  ]
+})
+
 for (const puzzle of Puzzles) {
   // Find overlapping letters
   for (const word of puzzle.words) {
