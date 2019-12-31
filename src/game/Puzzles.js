@@ -37,9 +37,9 @@ Puzzles.push({
   picture: '1.jpg',
   gridSize: 8,
   words: [
+    new Word('laptop', 2, 3, 'column'),
     new Word('glasses', 1, 3, 'row'),
     new Word('desk', 4, 1, 'column'),
-    new Word('laptop', 2, 3, 'column'),
     new Word('notebook', 1, 7, 'row'),
   ]
 })
@@ -48,8 +48,8 @@ Puzzles.push({
   picture: '2.jpg',
   gridSize: 11,
   words: [
-    new Word('hills', 1, 1, 'row'),
     new Word('sunset', 5, 1, 'column'),
+    new Word('hills', 1, 1, 'row'),
     new Word('water', 3, 6, 'row'),
     new Word('friends', 7, 5, 'column'),
     new Word('silhouette', 1, 8, 'row'),
@@ -61,8 +61,8 @@ Puzzles.push({
   picture: '3.jpg',
   gridSize: 12,
   words: [
-    new Word('freedom', 3, 3, 'column'),
     new Word('horses', 1, 4, 'row'),
+    new Word('freedom', 3, 3, 'column'),
     new Word('peaceful', 2, 6, 'row'),
     new Word('fence', 7, 6, 'column'),
     new Word('clouds', 7, 9, 'row'),
@@ -74,12 +74,12 @@ Puzzles.push({
   picture: '4.jpg',
   gridSize: 10,
   words: [
+    new Word('bicycle', 2, 4, 'row'),
+    new Word('walk', 10, 4, 'column'),
     new Word('pet', 1, 2, 'row'),
     new Word('tail', 3, 2, 'column'),
-    new Word('bicycle', 2, 4, 'row'),
     new Word('leash', 7, 4, 'column'),
     new Word('sock', 7, 7, 'row'),
-    new Word('walk', 10, 4, 'column'),
   ]
 })
 
@@ -87,8 +87,8 @@ Puzzles.push({
   picture: '5.jpg',
   gridSize: 10,
   words: [
-    new Word('kettle', 5, 1, 'row'),
     new Word('kitchen', 5, 1, 'column'),
+    new Word('kettle', 5, 1, 'row'),
     new Word('celery', 5, 4, 'row'),
     new Word('spices', 1, 6, 'row'),
     new Word('apron', 2, 5, 'column'),
@@ -99,10 +99,10 @@ Puzzles.push({
   picture: '6.jpg',
   gridSize: 10,
   words: [
+    new Word('writing', 4, 4, 'row'),
     new Word('door', 1, 6, 'column'),
     new Word('orange', 1, 8, 'row'),
     new Word('woman', 4, 4, 'column'),
-    new Word('writing', 4, 4, 'row'),
     new Word('brick', 6, 2, 'column'),
     new Word('pen', 9, 2, 'column'),
   ]
