@@ -31,12 +31,12 @@ const Word = function (text, x, y, direction) {
 
 Puzzles.push({
   picture: '1.jpg',
-  gridSize: 10,
+  gridSize: 8,
   words: [
-    new Word('glasses', 1, 4, 'row'),
-    new Word('desk', 4, 2, 'column'),
-    new Word('laptop', 2, 4, 'column'),
-    new Word('notebook', 1, 8, 'row'),
+    new Word('glasses', 1, 3, 'row'),
+    new Word('desk', 4, 1, 'column'),
+    new Word('laptop', 2, 3, 'column'),
+    new Word('notebook', 1, 7, 'row'),
   ]
 })
 

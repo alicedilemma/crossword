@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Game from './game/Game'
 import Puzzles from './game/Puzzles'
 
@@ -7,6 +7,14 @@ const App = () => {
   const handleNextLevel = () => {
     setCurrentLevel(oldLevel => oldLevel + 1)
   }
+
+  useEffect(() => {
+    document.body.style.background = '#191e1c'
+
+    return () => {
+      document.body.style.background = null
+    }
+  }, [])
 
   return (
     <Game 

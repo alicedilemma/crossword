@@ -7,10 +7,10 @@ import Word from './Word'
 const GridContainer = styled(({ gridSize, ...otherProps }) => <div {...otherProps} />)`
   width: 500px;
   height: 500px;
+  margin-bottom: 10px;
   display: grid;
   grid-template-columns: repeat(${({ gridSize }) => gridSize}, 1fr);
   grid-template-rows: repeat(${({ gridSize }) => gridSize}, 1fr);
-  background-color: purple;
 `
 
 const Board = props => {

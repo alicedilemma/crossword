@@ -4,7 +4,6 @@ import styled from 'styled-components'
 
 const PictureContainer = styled.img`
   height: 200px;
-  background-color: purple;
   margin: 0 auto;
   display: block;
 `

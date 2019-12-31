@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const StyledNextButton = styled.button`
   font-size: 35px;
-  margin: 0 auto;
+  margin: 10px auto;
   display: block;
 `
 

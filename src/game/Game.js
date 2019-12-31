@@ -12,6 +12,14 @@ const Base = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 30px;
+  max-width: 800px;
+  background: #5D4157;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #A8CABA, #5D4157);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #A8CABA, #5D4157); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 `
 
 const makePuzzleState = (puzzle) => {
