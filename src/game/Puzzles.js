@@ -13,9 +13,13 @@ function randomLetter() {
   return randomLetters[i]
 }
 
+// We add some random letters - more if the word is short.
 function getRandomLettersFor(word) {
+  const minTotalTiles = 6
+  const minDecoyTiles = 2
   const result = []
-  for (let i = 0; i < word.length / 3 || i < 3; i++) {
+  const lettersToAdd = Math.max(minDecoyTiles, minTotalTiles - word.length)
+  for (let i = 0; i < lettersToAdd; i++) {
     result.push(randomLetter())
   }
   return result
