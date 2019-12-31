@@ -43,15 +43,14 @@ const Word = function (text, x, y, direction) {
 }
 
 const puzzle = {
-  picture: 'https://p1.pxfuel.com/preview/485/1009/177/christmas-cookies-gingerbread-cookie-holiday-christmas-tree-gifts.jpg',
+  picture: '1.jpg',
   gridSize: 10,
   words: [
-    new Word('christmas', 4, 1, 'column'),
-    new Word('food', 7, 2, 'row'),
-    new Word('carol', 2, 3, 'row'),
-    new Word('santa', 4, 5, 'row'),
-    new Word('merry', 4, 7, 'row'),
-    new Word('presents', 1, 9, 'row'),
+    new Word('glasses', 1, 4, 'row'),
+    new Word('desk', 4, 2, 'column'),
+    new Word('laptop', 2, 4, 'column'),
+    new Word('notebook', 1, 8, 'row'),
+    //new Word('plant', 2, 9, 'row'),
   ]
 }
 

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const PictureContainer = styled.img`
-  width: 200px;
   height: 200px;
   background-color: purple;
   margin: 0 auto;
@@ -20,6 +19,7 @@ const PictureOverlay = styled.img`
   max-height: 100%;
   margin: auto;
   overflow: auto;
+  z-index: 2;
 `
 
 const Picture = props => {
