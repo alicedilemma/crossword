@@ -31,7 +31,6 @@ const makePuzzleState = (puzzle) => {
 
 const Game = props => {
   const { puzzle, onNextLevel } = props
-  console.log(onNextLevel)
 
   const [selectedWordIndex, setSelectedWordIndex] = useState(null)
   const [tempLettersState, setTempLettersState] = useState([])
