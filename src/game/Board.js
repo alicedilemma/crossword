@@ -23,7 +23,7 @@ const Board = props => {
     const fixedText = word.text.map(letter => { return {...letter}})
     
     fixedText.forEach((letter, letterIndex) => {
-      letter.isVisible |= puzzleState[wordIndex].isLetterDone[letterIndex]
+      letter.isVisible |= puzzleState[wordIndex]?.isLetterDone[letterIndex]
     })
     fixedWords.push({...word, text: fixedText})
   })

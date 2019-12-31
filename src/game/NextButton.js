@@ -8,9 +8,10 @@ const StyledNextButton = styled.button`
 `
 
 const NextButton = props => {
+  const { onNextLevel } = props
 
 	return (
-		<StyledNextButton>Next puzzle!</StyledNextButton>
+		<StyledNextButton onClick={onNextLevel}>Next puzzle!</StyledNextButton>
 	)
 }
 

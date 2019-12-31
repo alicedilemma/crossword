@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 import Board from './Board'
 import Tray from './Tray'
 import Picture from './Picture'
 import NextButton from './NextButton'
-
-import shuffle from 'shuffle-array'
 
 
 const Base = styled.div`
@@ -15,101 +14,30 @@ const Base = styled.div`
   align-items: center;
 `
 
-const randomLetters = 
-  ('abcdefghijklmnopqrstuvwxyz'
-  + 'abcdefghijklmnoprstuvwy'
-  + 'aeiou').split('')
-
-function randomLetter() {
-  const i = Math.floor(Math.random() * randomLetters.length)
-  return randomLetters[i]
-}
-
-function getRandomLettersFor(word) {
-  const result = []
-  for (let i = 0; i < word.length / 3 || i < 3; i++) {
-    result.push(randomLetter())
-  }
-  return result
-}
-
-const Word = function (text, x, y, direction) {
-  this.text = [...text].map(char => ({ letter: char, isVisible: false }))
-  this.coords = { x, y }
-  this.letters = [...text, ...getRandomLettersFor(text)]
-  shuffle(this.letters)
-  this.direction = direction
-  // this.text[3].isVisible = true
-}
-
-/*const puzzle = {
-  picture: '1.jpg',
-  gridSize: 10,
-  words: [
-    new Word('glasses', 1, 4, 'row'),
-    new Word('desk', 4, 2, 'column'),
-    new Word('laptop', 2, 4, 'column'),
-    new Word('notebook', 1, 8, 'row'),
-  ]
-}*/
-
-const puzzle = {
-  picture: '2.jpg',
-  gridSize: 11,
-  words: [
-    new Word('hills', 1, 1, 'row'),
-    new Word('sunset', 5, 1, 'column'),
-    new Word('water', 3, 6, 'row'),
-    new Word('friends', 7, 5, 'column'),
-  ]
-}
-
-// Find overlapping letters
-for (const word of puzzle.words) {
-  let x = word.coords.x
-  let y = word.coords.y
-  for (let i = 0; i < word.text.length; i++) {
-    for (const otherWord of puzzle.words) {
-      if (otherWord !== word) {
-        let x2 = otherWord.coords.x
-        let y2 = otherWord.coords.y
-        for (let j = 0; j < otherWord.text.length; j++) {
-          if (x2 === x && y2 === y) {
-            // an overlap
-            word.text[i].overlap = { wordIndex: puzzle.words.indexOf(otherWord), letterIndex: j} 
-          }
-          if (otherWord.direction === 'row') {
-            x2++
-          } else {
-            y2++
-          }
-        }
-      }
-    }
-    if (word.direction === 'row') {
-      x++
-    } else {
-      y++
-    }
-  }
+const makePuzzleState = (puzzle) => {
+  return puzzle.words.map(word => { return {
+  isDone: false,
+  isLetterDone: Array(word.text.length).fill(false) 
+}})
 }
 
 const Game = props => {
+  const { puzzle, onNextLevel } = props
+  console.log(onNextLevel)
 
   const [selectedWordIndex, setSelectedWordIndex] = useState(null)
   const [tempLettersState, setTempLettersState] = useState([])
   const [letterStates, setLetterStates] = useState([])
 
   const [isFinished, setIsFinished] = useState(false)
+  const [puzzleState, setPuzzleState] = useState(makePuzzleState(puzzle))
 
-  const makePuzzleState = () => {
-      return puzzle.words.map(word => { return {
-      isDone: false,
-      isLetterDone: Array(word.text.length).fill(false) 
-    }})
-  }
-
-  const [puzzleState, setPuzzleState] = useState(makePuzzleState())
+  useEffect(() => {
+    setSelectedWordIndex(null)
+    setTempLettersState([])
+    setIsFinished(false)
+    setPuzzleState(makePuzzleState(puzzle))
+  }, [puzzle])
 
   // Check if a word was solved
   useEffect(() => {
@@ -126,7 +54,7 @@ const Game = props => {
           // how to do cleanly
           setPuzzleState(puzzleState => {
             const { wordIndex, letterIndex } = letter.overlap
-            const newWordState = {... puzzleState[wordIndex]}
+            const newWordState = {...puzzleState[wordIndex]}
             newWordState.isLetterDone = [...newWordState.isLetterDone]
             newWordState.isLetterDone[letterIndex] = true
             return puzzleState.map((wordState, index) => index === wordIndex ? newWordState : wordState)
@@ -139,7 +67,7 @@ const Game = props => {
       setLetterStates([])
       // a separate useEffect will check if every word is now solved
     }
-  }, [tempLettersState, selectedWordIndex])
+  }, [tempLettersState, selectedWordIndex, puzzle])
 
   // is game finished?
   useEffect(() => {
@@ -213,13 +141,18 @@ const Game = props => {
         onRemoveTempLetter={handleRemoveTempLetter}
       />
       <Picture url={puzzle.picture}/>
-      {isFinished && <NextButton/>}
+      {isFinished && <NextButton onNextLevel={onNextLevel}/>}
       {!isFinished && <Tray
         letterStates={letterStates}
         onPickTempLetter={handlePickTempLetter}
       />}
     </Base>
   )
+}
+
+Game.propTypes = {
+	puzzle: PropTypes.object,
+	onNextLevel: PropTypes.func
 }
 
 export default Game
