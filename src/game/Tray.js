@@ -4,7 +4,8 @@ import styled from 'styled-components'
 
 const Container = styled.div`
 	display: flex;
-	flex-direction: row;
+  flex-direction: row;
+  flex-wrap: wrap;
 	justify-content: center;
   font-size: 35px;
   font-family: sans-serif;
